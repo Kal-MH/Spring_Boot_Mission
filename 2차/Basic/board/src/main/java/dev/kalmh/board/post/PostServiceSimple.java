@@ -24,7 +24,7 @@ public class PostServiceSimple implements PostService{
        if (!this.postRespository.save(dto)) {
             throw new RuntimeException("save failed");
         }
-        //현재 post primary key 반환
+        //현재 post primary key 반환.
         return this.postRespository.findAll().size() - 1;
     }
 

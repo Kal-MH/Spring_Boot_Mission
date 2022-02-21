@@ -7,5 +7,5 @@ public interface BoardRepository {
     List<BoardDto> findByAll(); // 게시판 목록 불러오기
     BoardDto findById(int id); // 특정 게시판 불러오기
     boolean update(int id, BoardDto dto); // 기존 게시판 이름 변경
-    boolean delete(int id);
+    boolean delete(int id); // 게시판 삭제
 }

@@ -77,35 +77,35 @@ public class BoardRestController {
         return this.boardService.readPostAll(id);
     }
 
-    @GetMapping("/{id}/post/{postId}")
+    @GetMapping("/{id}/post/{post-order}")
     public PostDto readBoardPost(
             @PathVariable("id") int id,
-            @PathVariable("postId") int postId
+            @PathVariable("post-order") int postOrder
     ) {
-        return this.boardService.readPost(id, postId);
+        return this.boardService.readPost(id, postOrder);
     }
 
-    @PutMapping("/{id}/post/{postId}")
+    @PutMapping("/{id}/post/{post-order}")
     public ResponseEntity updateBoardPost(
             @PathVariable("id") int id,
-            @PathVariable("postId") int postId,
+            @PathVariable("post-order") int postOrder,
             @RequestBody PostDto post
     ) {
         logger.info("board post update");
-        if (this.boardService.updatePost(id, postId, post))
+        if (this.boardService.updatePost(id, postOrder, post))
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         else
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping("/{id}/post/{postId}")
+    @DeleteMapping("/{id}/post/{post-order}")
     public ResponseEntity deleteBoardPost(
             @PathVariable("id") int id,
-            @PathVariable("postId") int postId,
+            @PathVariable("post-order") int postOrder,
             @RequestBody PostDto post
     ) {
         logger.info("board post delete");
-        if (this.boardService.deletePost(id, postId, post))
+        if (this.boardService.deletePost(id, postOrder, post))
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         else
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

@@ -72,36 +72,34 @@ public class BoardServiceSimple implements BoardService{
     }
 
     @Override
-    public PostDto readPost(int id, int postId) {
+    public PostDto readPost(int id, int postOrder) {
         BoardDto board = boardRepository.findById(id);
 
         if (board == null)
             return null;
-        int targetPostId = board.getPostIds().get(postId);
+        int targetPostId = board.getPostIds().get(postOrder);
         return postService.readPost(targetPostId);
     }
 
     @Override
-    public boolean updatePost(int id, int postId, PostDto post) {
+    public boolean updatePost(int id, int postOrder, PostDto post) {
         BoardDto board = boardRepository.findById(id);
 
         if (board == null)
             return false;
-        int targetPostId = board.getPostIds().get(postId);
+        int targetPostId = board.getPostIds().get(postOrder);
         return postService.updatePost(targetPostId, post);
     }
 
     @Override
-    public boolean deletePost(int id, int postId, PostDto post) {
+    public boolean deletePost(int id, int postOrder, PostDto post) {
         BoardDto board = boardRepository.findById(id);
 
         if (board == null)
             return false;
-        int targetPostId = board.getPostIds().get(postId);
-        //만약, 데이터베이스 연결이 되어 있다면 postId에 대해서 Object를 얻어오고 비교가
-        // 가능하지 않을까
+        int targetPostId = board.getPostIds().get(postOrder);
         if (post.getPassword() != null) {
-            board.getPostIds().remove(postId);
+            board.getPostIds().remove(postOrder);
             return true;
         }
         return false;

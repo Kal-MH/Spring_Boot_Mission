@@ -36,11 +36,10 @@ public class PostRepositoryInMemory implements PostRepository{
     public boolean update(int id, PostDto dto) {
         PostDto targetPost = this.postList.get(id);
 
-        //writer, password는 변경 불가하다고 설정
-        // - password를 이용해서 title, content 변경
         if (!dto.getPassword().equals(targetPost.getPassword()))
             return false;
 
+        //writer, password는 변경 불가하다고 가정.
         if (targetPost.getTitle() != null)
             targetPost.setTitle(dto.getTitle());
         if (targetPost.getContent() != null)
