@@ -1,10 +1,10 @@
-package dev.kalmh.crud;
+package dev.kalmh.board;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CrudApplicationTests {
+class BoardApplicationTests {
 
 	@Test
 	void contextLoads() {

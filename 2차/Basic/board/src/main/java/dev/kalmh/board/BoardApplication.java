@@ -1,13 +1,13 @@
-package dev.kalmh.crud;
+package dev.kalmh.board;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CrudApplication {
+public class BoardApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CrudApplication.class, args);
+		SpringApplication.run(BoardApplication.class, args);
 	}
 
 }
