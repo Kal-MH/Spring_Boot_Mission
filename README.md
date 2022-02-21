@@ -3,7 +3,8 @@
 ## 1차 미션 (~ 2/9)
 - 에어테이블로 제출했습니다.
 
-## 2차 미션 스크린샷 (~ 2/22)
+## 2차 미션 스크린샷 (~ 2/22) 
+[Basic 2차 미션 Document](https://github.com/Kal-MH/Spring_Boot_Mission/blob/master/2%EC%B0%A8/Basic/README.md)
 
 ### Read
 
