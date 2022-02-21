@@ -20,8 +20,8 @@
 - boardList
 - postList
 
-모든 게시글(PostDto)은 postList에 저장되며, boardList에 저장된 게시판(BoardDto)들은 각각 등록된 게시글의 id값 즉, postList 상에서의
-인덱스값을 가지고 있습니다.
+모든 게시글(PostDto)은 postList에 저장되며, boardList에 저장된 게시판(BoardDto)들은 각각 등록된 게시글들의 id값 즉, postList 상에서의
+인덱스값들을 가지고 있습니다.
 
 ```
 예시)
