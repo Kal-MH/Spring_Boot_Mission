@@ -20,8 +20,9 @@
 - boardList
 - postList
 
-모든 게시글(PostDto)은 postList에 저장되며, boardList에 저장된 게시판(BoardDto)들은 각각 등록된 게시글들의 id값 즉, postList 상에서의
-인덱스값들을 가지고 있습니다.
+모든 게시글(PostDto)은 postList에 저장됩니다.
+
+boardList에 저장된 게시판(BoardDto)은 게시글의 id값 즉, postList 상에서의 인덱스값들을 가지고 있습니다.
 
 ```
 예시)
@@ -118,7 +119,7 @@ boardList -> {
 
 ## 개선점
 
-1. 게시글의 id는 postList의 인덱스값으로 `DELETE` 요청 시, 실제 게시글을 삭제하지 않고, board의 postIds 리스트에서만 제거.
+1. 게시글의 id는 postList의 인덱스값으로 `DELETE` 요청 시, 실제 게시글을 삭제하지 않고, board의 postIds 리스트에서만 제거합니다.
     1. postList내의 원소들의 위치가 고정되어 있어야 원하는 데이터의 조회결과를 얻을 수 있습니다.
     2. DB를 사용하게 된다면 각각의 board마다 테이블 작성하고 각각의 테이블이 가지는 primary key를 이용해서 접근하는 방법으로 구현해볼 수 있습니다.
     3. mysql DB를 사용한다는 가정 하에,  foreign key로 연결된 tuple들은 같이 삭제해주는 `on delete cascade` 사용을 고려해볼 수 있습니다.
