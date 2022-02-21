@@ -18,7 +18,7 @@ public class PostRepositoryInMemory implements PostRepository{
     @Override
     public boolean save(PostDto dto) {
         //primary key 수동으로 설정.
-        dto.setId(postList.size());
+        dto.setId(this.postList.size());
         return this.postList.add(dto);
     }
 

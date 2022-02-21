@@ -21,7 +21,7 @@ public class PostServiceSimple implements PostService{
     @Override
     public int createPost(PostDto dto) {
         // TODO check validity
-        if (!this.postRespository.save(dto)) {
+       if (!this.postRespository.save(dto)) {
             throw new RuntimeException("save failed");
         }
         //현재 post primary key 반환

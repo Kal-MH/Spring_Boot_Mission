@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class BoardRestController {
     }
 
     @GetMapping()
-    public List<BoardDto> readBoard() {
+    public List<BoardDto> readBoardAll() {
         logger.info("read all board");
         return this.boardService.readBoardAll();
     }
@@ -38,20 +39,42 @@ public class BoardRestController {
     }
 
     @PutMapping("{id}")
-    public void updateBoard(
+    public ResponseEntity updateBoard(
             @PathVariable("id") int id,
             @RequestBody BoardDto dto
     ) {
-        this.boardService.updateBoard(id, dto);
+        if (this.boardService.updateBoard(id, dto))
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        else
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteBoard(
+            @PathVariable("id") int id
+    ) {
+        if (this.boardService.deleteBoard(id))
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        else
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/{id}/post")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createBoardPost(
+    public ResponseEntity createBoardPost(
             @PathVariable("id") int id,
             @RequestBody PostDto post
     ) {
-        this.boardService.createPost(id, post);
+        if (this.boardService.createPost(id, post))
+            return new ResponseEntity(HttpStatus.CREATED);
+        else
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/{id}/post")
+    public List<PostDto> readBoardPostAll(
+            @PathVariable("id") int id
+    ) {
+        return this.boardService.readPostAll(id);
     }
 
     @GetMapping("/{id}/post/{postId}")
@@ -59,24 +82,32 @@ public class BoardRestController {
             @PathVariable("id") int id,
             @PathVariable("postId") int postId
     ) {
-        return this.boardService.readPostOne(id, postId);
+        return this.boardService.readPost(id, postId);
     }
 
     @PutMapping("/{id}/post/{postId}")
-    public void updateBoardPost(
+    public ResponseEntity updateBoardPost(
             @PathVariable("id") int id,
             @PathVariable("postId") int postId,
             @RequestBody PostDto post
     ) {
-        this.boardService.updatePost(id, postId, post);
+        logger.info("board post update");
+        if (this.boardService.updatePost(id, postId, post))
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        else
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/{id}/post/{postId}")
-    public void deleteBoardPost(
+    public ResponseEntity deleteBoardPost(
             @PathVariable("id") int id,
             @PathVariable("postId") int postId,
             @RequestBody PostDto post
     ) {
-        this.boardService.deletePost(id, postId, post);
+        logger.info("board post delete");
+        if (this.boardService.deletePost(id, postId, post))
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        else
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }

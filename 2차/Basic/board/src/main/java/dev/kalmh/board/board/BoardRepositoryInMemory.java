@@ -18,7 +18,14 @@ public class BoardRepositoryInMemory implements BoardRepository{
     @Override
     public boolean save(BoardDto dto) {
         //primary key 수동 설정
-        dto.setId(this.boardList.size());
+        int id;
+        if (this.boardList.size() == 0)
+            id = 0;
+        else {
+            BoardDto lastDto = this.boardList.get(this.boardList.size() - 1);
+            id = lastDto.getId() + 1;
+        }
+        dto.setId(id);
         return this.boardList.add(dto);
     }
 
@@ -29,24 +36,37 @@ public class BoardRepositoryInMemory implements BoardRepository{
 
     @Override
     public BoardDto findById(int id) {
-        return this.boardList.get(id);
+        for (BoardDto b: this.boardList) {
+            if (b.getId() == id)
+                return b;
+        }
+        return null;
     }
 
-    //기존 게시판 이름 갱신하기
     @Override
     public boolean update(int id, BoardDto dto) {
-        BoardDto targetDto = this.boardList.get(id);
-
-        if (targetDto.getCategoryName() != null) {
-            targetDto.setCategoryName(dto.getCategoryName());
+        BoardDto target;
+        for(int i = 0; i < this.boardList.size(); i++) {
+            target = this.boardList.get(i);
+            if (target.getId() == id && target.getCategoryName() != null) {
+                target.setCategoryName(dto.getCategoryName());
+                this.boardList.set(i, target);
+                return true;
+            }
         }
-        this.boardList.set(id, targetDto);
-        return true;
+        return false;
     }
 
     @Override
     public boolean delete(int id) {
-        this.boardList.remove(id);
-        return true;
+        BoardDto target;
+        for(int i = 0; i < this.boardList.size(); i++) {
+            target = this.boardList.get(i);
+            if (target.getId() == id) {
+                this.boardList.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 }

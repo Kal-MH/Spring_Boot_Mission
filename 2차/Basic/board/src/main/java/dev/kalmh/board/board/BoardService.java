@@ -9,13 +9,13 @@ public interface BoardService {
     void createBoard(BoardDto dto);
     List<BoardDto> readBoardAll();
     BoardDto readBoard(int id);
-    void updateBoard(int id, BoardDto dto);
-    void deleteBoard(int id);
+    boolean updateBoard(int id, BoardDto dto);
+    boolean deleteBoard(int id);
 
     //게시글 관련
-    void createPost(int id, PostDto post);
-    void readPost(int id);
-    PostDto readPostOne(int id, int postId);
-    void updatePost(int id, int postId, PostDto post);
-    void deletePost(int id, int postId, PostDto post);
+    boolean createPost(int id, PostDto post);
+    List<PostDto> readPostAll(int id);
+    PostDto readPost(int id, int postId);
+    boolean updatePost(int id, int postId, PostDto post);
+    boolean deletePost(int id, int postId, PostDto post);
 }
