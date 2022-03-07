@@ -120,19 +120,4 @@ public class PostDao {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         this.postRepository.delete(postEntity);
     }
-    public void deletePost(int boardId, int idx, PostDto dto) {
-        Optional<BoardEntity> board = this.boardRepository.findById((long)boardId);
-        if (board.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-
-        if (idx >= board.get().getPostEntityList().size())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        PostEntity postEntity = board.get().getPostEntityList().get(idx);
-        //PostEntity postEntity = this.postRepository.findById(board.get().getPostEntityList().get(idx).getId()).get();
-        logger.info("delete id and password " + postEntity.getId() +" "+ postEntity.getPassword());
-        if (!postEntity.getPassword().equals(dto.getPassword()))
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        this.postRepository.delete(postEntity);
-        logger.info("deletePost with boarId called");
-    }
 }
