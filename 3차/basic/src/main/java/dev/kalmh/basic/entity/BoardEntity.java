@@ -17,7 +17,8 @@ public class BoardEntity extends BaseEntity{
     @OneToMany(
             targetEntity = PostEntity.class,
             fetch = FetchType.LAZY,
-            mappedBy = "boardEntity"
+            mappedBy = "boardEntity",
+            cascade = CascadeType.ALL
     )
     private List<PostEntity> postEntityList = new ArrayList<>();
 
@@ -44,5 +45,9 @@ public class BoardEntity extends BaseEntity{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void savePost(PostEntity post) {
+        this.postEntityList.add(post);
     }
 }

@@ -1,6 +1,8 @@
 package dev.kalmh.basic.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -12,22 +14,19 @@ public class UserEntity extends BaseEntity{
     @Column(nullable = false, length = 30)
     private String loginId;
 
-    @Column(nullable = false, length = 30)
-    private String password;
-
-    /*
-    TODO
-    - 사용자 조회 시, 지금까지 작성한 게시글 보여주기
-     */
+    @OneToMany(
+            targetEntity = PostEntity.class,
+            fetch = FetchType.LAZY,
+            mappedBy = "writer",
+            cascade = CascadeType.ALL
+    )
+    private List<PostEntity> postEntityList = new ArrayList<>();
 
     public UserEntity() {}
     public UserEntity(String loginId) {
         this.loginId = loginId;
     }
-    public UserEntity(String loginId, String password) {
-        this.loginId = loginId;
-        this.password = password;
-    }
+
 
     public Long getId() {
         return id;
@@ -37,7 +36,11 @@ public class UserEntity extends BaseEntity{
         return loginId;
     }
 
-    public String getPassword() {
-        return password;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
     }
 }

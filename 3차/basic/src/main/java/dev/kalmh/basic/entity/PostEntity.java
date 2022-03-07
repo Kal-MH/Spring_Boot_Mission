@@ -33,11 +33,11 @@ public class PostEntity extends BaseEntity{
 
     public PostEntity() {}
 
-    public PostEntity(String title, String content, UserEntity writer, String password, BoardEntity boardEntity) {
+    public PostEntity(String title, String content,  String password, UserEntity writer, BoardEntity boardEntity) {
         this.title = title;
         this.content = content;
-        this.writer = writer;
         this.password = password;
+        this.writer = writer;
         this.boardEntity = boardEntity;
     }
 

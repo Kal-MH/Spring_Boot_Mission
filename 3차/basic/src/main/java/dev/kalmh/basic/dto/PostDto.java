@@ -4,14 +4,16 @@ public class PostDto {
     private int id;
     private String title;
     private String content;
-    private String writer;
+    private String password;
+    private int userId;
     private int boardId;
 
-    public PostDto(int id, String title, String content, String writer, int boardId) {
+    public PostDto(int id, String title, String content, String password, int userId, int boardId) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.writer = writer;
+        this.password = password;
+        this.userId = userId;
         this.boardId = boardId;
     }
 
@@ -27,11 +29,15 @@ public class PostDto {
         return content;
     }
 
-    public String getWriter() {
-        return writer;
-    }
-
     public int getBoardId() {
         return boardId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getUserId() {
+        return userId;
     }
 }
