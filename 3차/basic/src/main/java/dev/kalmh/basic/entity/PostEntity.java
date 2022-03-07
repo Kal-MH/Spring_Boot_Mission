@@ -64,4 +64,28 @@ public class PostEntity extends BaseEntity{
     public UserEntity getWriter() {
         return writer;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setBoardEntity(BoardEntity boardEntity) {
+        this.boardEntity = boardEntity;
+    }
+
+    public void setWriter(UserEntity writer) {
+        this.writer = writer;
+    }
 }

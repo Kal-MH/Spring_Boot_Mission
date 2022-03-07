@@ -37,4 +37,12 @@ public class BoardEntity extends BaseEntity{
     public List<PostEntity> getPostEntityList() {
         return postEntityList;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

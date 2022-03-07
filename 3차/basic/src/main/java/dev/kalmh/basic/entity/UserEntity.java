@@ -15,6 +15,11 @@ public class UserEntity extends BaseEntity{
     @Column(nullable = false, length = 30)
     private String password;
 
+    /*
+    TODO
+    - 사용자 조회 시, 지금까지 작성한 게시글 보여주기
+     */
+
     public UserEntity() {}
     public UserEntity(String loginId) {
         this.loginId = loginId;
