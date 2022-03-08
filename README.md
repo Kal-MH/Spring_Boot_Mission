@@ -25,7 +25,7 @@
 ![delete_board](https://user-images.githubusercontent.com/59648372/154989545-ccbb191f-c977-4f38-809f-64317e5b6f0e.png)
 
 ## 3차 미션 스크린샷(~ 3/8)
-[Basic 3차 미션 Document](https://github.com/Kal-MH/Spring_Boot_Mission/blob/master/3%EC%B0%A8/README.md)
+[Basic & Challenge 3차 미션 Document](https://github.com/Kal-MH/Spring_Boot_Mission/blob/master/3%EC%B0%A8/README.md)
 
 ### Read
 
@@ -50,3 +50,7 @@
 (삭제된 후)
 
 ![after](https://user-images.githubusercontent.com/59648372/157108048-52eaa24d-3d5e-403e-8c37-4f23cf48e097.png)
+
+### Challenge ERD Diagram
+
+![challenge ERD](https://user-images.githubusercontent.com/59648372/157195113-8b5b0fe3-ee33-42fa-86ef-0248fe771211.png)
