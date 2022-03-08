@@ -278,7 +278,7 @@ ShopEntity
 4. `ShopPostEntity`
     1. **POST /user/{user-id}/shop/{shop-id}/post**
         1. Request Body : `title`, `content`, `password`, `shop`, `writer`
-        2. 작성 전에 `writer`가 `owner`와 일치하는 지 확인하는 작업이 필요하다.
+        2. 작성 전에 `writer`가 `owner`와 일치하는 지 확인하는 작업이 필요합니다.
     2. **Get /shop/{shop-id}/post**
         1. shop-id를 가진 상점에 대한 `ShopPostEntity` 게시글 전체 조회
     3. **Get /shop/{shop-id}/post/{id}**
@@ -286,7 +286,7 @@ ShopEntity
     4. **PUT /shop/{shop-id}/post/{id}**
         1. Request Body : `title`, `content`, `password`
         2. shop-id를 가진 상점에 대한 `ShopPostEntity` id 게시글 수정
-        3. `writer`, `shop`은 변경 대상이 아니라고 가정한다.
+        3. `writer`, `shop`은 변경 대상이 아니라고 가정합니다.
         4. 고려사항
             1. `password` 일치 여부 확인 작업 필요.
     5. **DELETE /shop/{shop-id}/post/{id}**
@@ -304,7 +304,7 @@ ShopEntity
     4. **PUT /shop/{shop-id}/review/{id}**
         1. Request Body : `title`, `content`, `password`
         2. shop-id를 가진 상점에 대한 `ShopReviewEntity` id 게시글 수정
-        3. `writer`, `shop`은 변경 대상이 아니라고 가정한다.
+        3. `writer`, `shop`은 변경 대상이 아니라고 가정합니다.
         4. 고려사항
             1. `password` 일치 여부 확인 작업 필요.
     5. **DELETE /shop/{shop-id}/review/{id}**
@@ -315,6 +315,6 @@ ShopEntity
 
 ## 개선점
 
-1. CRUD 구현하지 못해 아쉽습니다.
+1. CRUD가 구현되어 있지 않습니다.
 2. 어디까지나 구현 구상으로, 알 수 없는 동작 오류들이 많이 발생할 것으로 예상됩니다.
 3. `ShopEntity` 의 수정, 삭제 과정에서 유효한 사용자의 요청인지 검사하는 부분이 고려되지 않고 있습니다. `owner`가 변경되지 않는다는 가정 하에, `owner`임을 확인하고 수정, 삭제 과정을 진행하는 방법을 생각해볼 수 있습니다.
