@@ -121,7 +121,8 @@
 
 (ERD Diagram)
 
-![challenge ERD](https://user-images.githubusercontent.com/59648372/157193235-af71efe6-738f-4873-b505-1ad903de3c6d.png)
+![challenge ERD](https://user-images.githubusercontent.com/59648372/157195113-8b5b0fe3-ee33-42fa-86ef-0248fe771211.png)
+
 
 ### BaseEntity
 
