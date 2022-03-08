@@ -52,7 +52,7 @@ public class PostDao {
                 board.get()
         );
         PostEntity savedPost = this.postRepository.save(postEntity);
-        //board.get().savePost(savedPost);
+        board.get().savePost(savedPost);
     }
 
     //GET ALL
@@ -116,6 +116,20 @@ public class PostDao {
         }
         PostEntity postEntity = targetEntity.get();
 
+        if (!postEntity.getPassword().equals(dto.getPassword()))
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        this.postRepository.delete(postEntity);
+    }
+    public void deletePost(int boardId, int idx, PostDto dto) {
+        Optional<BoardEntity> board = this.boardRepository.findById((long)boardId);
+        if (board.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+        List<PostEntity> postEntityList = board.get().getPostEntityList();
+        if (idx >= postEntityList.size())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+        PostEntity postEntity = postEntityList.get(idx);
         if (!postEntity.getPassword().equals(dto.getPassword()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         this.postRepository.delete(postEntity);

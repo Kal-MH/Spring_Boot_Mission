@@ -13,8 +13,6 @@ public class PostEntity extends BaseEntity{
     private String title;
     private String content;
 
-    //꼭 있어야 하는가?
-    // - login기능이 없으므로 게시글마다 password가 있다고 가정
     private String password;
 
     @ManyToOne(

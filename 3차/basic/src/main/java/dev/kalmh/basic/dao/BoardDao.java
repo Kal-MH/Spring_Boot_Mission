@@ -2,7 +2,9 @@ package dev.kalmh.basic.dao;
 
 import dev.kalmh.basic.dto.BoardDto;
 import dev.kalmh.basic.entity.BoardEntity;
+import dev.kalmh.basic.entity.PostEntity;
 import dev.kalmh.basic.repository.BoardRepository;
+import dev.kalmh.basic.repository.PostRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +13,21 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class BoardDao {
     private static final Logger logger = LoggerFactory.getLogger(BoardDao.class);
     private final BoardRepository boardRepository;
+    private final PostRepository postRepository;
 
     public BoardDao(
-            @Autowired BoardRepository boardRepository
+            @Autowired BoardRepository boardRepository,
+            @Autowired PostRepository postRepository
     ) {
         this.boardRepository = boardRepository;
+        this.postRepository = postRepository;
     }
 
     //POST
@@ -59,6 +65,10 @@ public class BoardDao {
         Optional<BoardEntity> targetEntity = this.boardRepository.findById((long)id);
         if (targetEntity.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        List<PostEntity> postEntityList = targetEntity.get().getPostEntityList();
+        for(PostEntity post : postEntityList) {
+            this.postRepository.delete(post);
+        }
         this.boardRepository.delete(targetEntity.get());
     }
 }

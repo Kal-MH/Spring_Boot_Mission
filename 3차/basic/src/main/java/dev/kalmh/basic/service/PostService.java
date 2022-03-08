@@ -97,4 +97,5 @@ public class PostService {
 
     //DELETE
     public void deletePost(int id, PostDto dto) {this.postDao.deletePost(id, dto);}
+    public void deletePost(int boardId, int idx, PostDto dto) {this.postDao.deletePost(boardId, idx, dto);}
 }

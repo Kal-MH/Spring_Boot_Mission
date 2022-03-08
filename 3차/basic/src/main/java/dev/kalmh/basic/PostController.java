@@ -76,4 +76,13 @@ public class PostController {
     ) {
         this.postService.deletePost(id, dto);
     }
+    @DeleteMapping("/board/{board-id}/post/{post-idx}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void deletePost(
+            @PathVariable("board-id") int boardId,
+            @PathVariable("post-idx") int idx,
+            @RequestBody PostDto postDto
+    ) {
+        this.postService.deletePost(boardId, idx, postDto);
+    }
 }

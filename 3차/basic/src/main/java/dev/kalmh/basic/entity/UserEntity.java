@@ -17,8 +17,7 @@ public class UserEntity extends BaseEntity{
     @OneToMany(
             targetEntity = PostEntity.class,
             fetch = FetchType.LAZY,
-            mappedBy = "writer",
-            cascade = CascadeType.ALL
+            mappedBy = "writer"
     )
     private List<PostEntity> postEntityList = new ArrayList<>();
 
@@ -42,5 +41,13 @@ public class UserEntity extends BaseEntity{
 
     public void setLoginId(String loginId) {
         this.loginId = loginId;
+    }
+
+    public List<PostEntity> getPostEntityList() {
+        return postEntityList;
+    }
+
+    public void setPostEntityList(List<PostEntity> postEntityList) {
+        this.postEntityList = postEntityList;
     }
 }

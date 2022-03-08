@@ -17,8 +17,7 @@ public class BoardEntity extends BaseEntity{
     @OneToMany(
             targetEntity = PostEntity.class,
             fetch = FetchType.LAZY,
-            mappedBy = "boardEntity",
-            cascade = CascadeType.ALL
+            mappedBy = "boardEntity"
     )
     private List<PostEntity> postEntityList = new ArrayList<>();
 
