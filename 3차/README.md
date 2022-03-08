@@ -1,5 +1,13 @@
 # Basic
 
+## Spring Properties
+- 각각 local, test모드로 나눠 개발을 진행합니다.
+    - application-test.yml
+        - h2 database 사용
+    - application-local.yml
+        - MySQL8 사용
+- DB키 보호를 위해 application-local.yml은 .gitignore로 관리합니다.
+
 ## Entity
 
 ### BaseEntity
