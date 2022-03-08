@@ -50,8 +50,7 @@ public class PostDao {
                 user.get(),
                 board.get()
         );
-        PostEntity savedPost = this.postRepository.save(postEntity);
-        board.get().savePost(savedPost);
+        this.postRepository.save(postEntity);
     }
 
     //GET ALL
