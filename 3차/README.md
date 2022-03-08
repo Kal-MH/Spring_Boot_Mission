@@ -181,7 +181,7 @@ UserEntity
 
 - `UserEntity`와 `AreaEntity`는 @OneToOne관계를 갖습니다.
 - `UserEntity`와 `shoptEntity`는 @OneToMany 관계를 갖습니다.
-- `isOwner`는 `Shop`이 만들어질 때, Shop의 생성자 안에서 변경됩니다.
+- `isOwner`는 `Shop`이 만들어질 때, `Shop`의 생성자 안에서 변경됩니다.
 
 ### ShopEntity
 
@@ -209,8 +209,9 @@ UserEntity
     
     - `ShopPostEntity` 와 `ShopEntity`는 @ManyToOne관계를 갖습니다.
         - `ShopPostEntity`는 가게 주인이 쓰는 게시글로, 하나 이상의 가게에 대한 글이 됩니다.
+        - 가게 주인이 여러 군데에 가게를 가질 수 있기 때문입니다.
     - `ShopPostEntity` 와 `UserEntity`는 @OneToOne 관계를 갖습니다.
-        - 가게 주인만이 쓸 수 있는 글(소유주는 한 명이라고 가정합니다)로, `checkIsOwner()` 메소드를 통해 현재 작성자가 가게 주인인지 확인합니다.
+        - 가게 주인만이 쓸 수 있는 글(가게 주인은 한 명이라고 정합니다)로, `ShopPostEntity`에서 `checkIsOwner()` 메소드를 통해 현재 작성자가 가게 주인인지 확인합니다.
 - `ShopReviewEntity`
     
     ```java
