@@ -1,5 +1,7 @@
 package dev.kalmh.challenge.entity.shop;
 
+import dev.kalmh.challenge.entity.BaseEntity;
+
 import javax.persistence.*;
 
 @Entity

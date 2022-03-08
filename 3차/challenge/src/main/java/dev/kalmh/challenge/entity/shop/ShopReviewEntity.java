@@ -1,12 +1,13 @@
 package dev.kalmh.challenge.entity.shop;
 
+import dev.kalmh.challenge.entity.BaseEntity;
 import dev.kalmh.challenge.entity.UserEntity;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "shop_review")
-public class ShopReviewEntity {
+public class ShopReviewEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

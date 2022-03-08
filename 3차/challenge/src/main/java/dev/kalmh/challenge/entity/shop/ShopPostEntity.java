@@ -1,5 +1,6 @@
 package dev.kalmh.challenge.entity.shop;
 
+import dev.kalmh.challenge.entity.BaseEntity;
 import dev.kalmh.challenge.entity.BoardEntity;
 import dev.kalmh.challenge.entity.UserEntity;
 import org.springframework.http.HttpStatus;
@@ -7,8 +8,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.*;
 
-
-public class ShopPostEntity {
+@Entity
+@Table(name = "shop_post")
+public class ShopPostEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
