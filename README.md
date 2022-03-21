@@ -6,7 +6,7 @@
 ## 2차 미션 스크린샷 (~ 2/22) 
 [Basic 2차 미션 Document](https://github.com/Kal-MH/Spring_Boot_Mission/blob/master/2%EC%B0%A8/Basic/README.md)
 
-### Read
+### 실행결과
 
 - **GET /board**
 
@@ -27,7 +27,7 @@
 ## 3차 미션 스크린샷(~ 3/8)
 [Basic & Challenge 3차 미션 Document](https://github.com/Kal-MH/Spring_Boot_Mission/blob/master/3%EC%B0%A8/README.md)
 
-### Read
+### 실행결과
 
 - **GET /board/1/post/**
 

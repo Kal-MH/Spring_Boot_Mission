@@ -181,7 +181,7 @@ UserEntity
 
 - `UserEntity`와 `AreaEntity`는 @OneToOne관계를 갖습니다.
 - `UserEntity`와 `shoptEntity`는 @OneToMany 관계를 갖습니다.
-- `isOwner`는 `Shop`이 만들어질 때, Shop의 생성자 안에서 변경됩니다.
+- `isOwner`는 `Shop`이 만들어질 때, `Shop`의 생성자 안에서 변경됩니다.
 
 ### ShopEntity
 
@@ -209,8 +209,9 @@ UserEntity
     
     - `ShopPostEntity` 와 `ShopEntity`는 @ManyToOne관계를 갖습니다.
         - `ShopPostEntity`는 가게 주인이 쓰는 게시글로, 하나 이상의 가게에 대한 글이 됩니다.
+        - 가게 주인이 여러 군데에 가게를 가질 수 있기 때문입니다.
     - `ShopPostEntity` 와 `UserEntity`는 @OneToOne 관계를 갖습니다.
-        - 가게 주인만이 쓸 수 있는 글(소유주는 한 명이라고 가정합니다)로, `checkIsOwner()` 메소드를 통해 현재 작성자가 가게 주인인지 확인합니다.
+        - 가게 주인만이 쓸 수 있는 글(가게 주인은 한 명이라고 정합니다)로, `ShopPostEntity`에서 `checkIsOwner()` 메소드를 통해 현재 작성자가 가게 주인인지 확인합니다.
 - `ShopReviewEntity`
     
     ```java
@@ -277,7 +278,7 @@ ShopEntity
 4. `ShopPostEntity`
     1. **POST /user/{user-id}/shop/{shop-id}/post**
         1. Request Body : `title`, `content`, `password`, `shop`, `writer`
-        2. 작성 전에 `writer`가 `owner`와 일치하는 지 확인하는 작업이 필요하다.
+        2. 작성 전에 `writer`가 `owner`와 일치하는 지 확인하는 작업이 필요합니다.
     2. **Get /shop/{shop-id}/post**
         1. shop-id를 가진 상점에 대한 `ShopPostEntity` 게시글 전체 조회
     3. **Get /shop/{shop-id}/post/{id}**
@@ -285,7 +286,7 @@ ShopEntity
     4. **PUT /shop/{shop-id}/post/{id}**
         1. Request Body : `title`, `content`, `password`
         2. shop-id를 가진 상점에 대한 `ShopPostEntity` id 게시글 수정
-        3. `writer`, `shop`은 변경 대상이 아니라고 가정한다.
+        3. `writer`, `shop`은 변경 대상이 아니라고 가정합니다.
         4. 고려사항
             1. `password` 일치 여부 확인 작업 필요.
     5. **DELETE /shop/{shop-id}/post/{id}**
@@ -303,7 +304,7 @@ ShopEntity
     4. **PUT /shop/{shop-id}/review/{id}**
         1. Request Body : `title`, `content`, `password`
         2. shop-id를 가진 상점에 대한 `ShopReviewEntity` id 게시글 수정
-        3. `writer`, `shop`은 변경 대상이 아니라고 가정한다.
+        3. `writer`, `shop`은 변경 대상이 아니라고 가정합니다.
         4. 고려사항
             1. `password` 일치 여부 확인 작업 필요.
     5. **DELETE /shop/{shop-id}/review/{id}**
@@ -314,6 +315,6 @@ ShopEntity
 
 ## 개선점
 
-1. CRUD 구현하지 못해 아쉽습니다.
+1. CRUD가 구현되어 있지 않습니다.
 2. 어디까지나 구현 구상으로, 알 수 없는 동작 오류들이 많이 발생할 것으로 예상됩니다.
 3. `ShopEntity` 의 수정, 삭제 과정에서 유효한 사용자의 요청인지 검사하는 부분이 고려되지 않고 있습니다. `owner`가 변경되지 않는다는 가정 하에, `owner`임을 확인하고 수정, 삭제 과정을 진행하는 방법을 생각해볼 수 있습니다.
