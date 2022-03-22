@@ -33,24 +33,31 @@
 
 ![boardPostread](https://user-images.githubusercontent.com/59648372/157107839-c659b558-e4c8-46f7-8c36-118dd6d0ecdd.png)
 
-- **GET /board/1/post/0**
-
-![boardPostreadOne](https://user-images.githubusercontent.com/59648372/157107886-8645e55d-fadd-4aa4-a814-68cb6309f524.png)
-
 - **GET /user**
 
 ![userFindAll](https://user-images.githubusercontent.com/59648372/157108033-15474207-b893-4409-b979-7ef23cb89121.png)
 
-- **DELETE /user/1**
-
-(삭제되기 전)
-
-![before](https://user-images.githubusercontent.com/59648372/157108042-fb5b372e-8f50-4dbc-8888-fb6f2bb302d0.png)
-
-(삭제된 후)
-
-![after](https://user-images.githubusercontent.com/59648372/157108048-52eaa24d-3d5e-403e-8c37-4f23cf48e097.png)
-
 ### Challenge ERD Diagram
 
 ![challenge ERD](https://user-images.githubusercontent.com/59648372/157195113-8b5b0fe3-ee33-42fa-86ef-0248fe771211.png)
+
+## 4차 미션 스크린샷(~ 3/22)
+[Basic 3차 미션 Document](https://github.com/Kal-MH/Spring_Boot_Mission/blob/master/4%EC%B0%A8/README.md)
+
+### 실행결과
+
+- 홈화면
+
+![home](https://user-images.githubusercontent.com/59648372/159421016-75896ad3-0066-40bc-bd98-458412558ded.png)
+
+- 로그인 화면
+
+![login](https://user-images.githubusercontent.com/59648372/159421058-08059893-ac8a-4634-b5ae-b3b16d604301.png)
+
+- 회원가입 화면
+
+![signup](https://user-images.githubusercontent.com/59648372/159421140-67c3facc-f5dc-4749-952e-2e2959fc7356.png)
+
+- 로그인 성공
+
+![login-home](https://user-images.githubusercontent.com/59648372/159421184-c1b56a1f-a422-46ba-ad61-2657b5ed5e0a.png)
