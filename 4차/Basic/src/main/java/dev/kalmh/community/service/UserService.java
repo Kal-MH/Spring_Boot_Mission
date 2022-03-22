@@ -5,7 +5,6 @@ import dev.kalmh.community.entity.AreaEntity;
 import dev.kalmh.community.entity.UserEntity;
 import dev.kalmh.community.repository.AreaRepository;
 import dev.kalmh.community.repository.UserRepository;
-import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -23,7 +22,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final AreaRepository areaRepository;
     private final PasswordEncoder passwordEncoder;
-    private static long randomValue;
+    private static long rotationValue;
     private static final int DUMMY_LENGTH = 3;
 
     public UserService(
@@ -44,7 +43,7 @@ public class UserService {
     }
 
     public UserDto createUser(UserDto userDto){
-        Optional<AreaEntity> areaEntityOptional = this.areaRepository.findById((randomValue % DUMMY_LENGTH) + 1);
+        Optional<AreaEntity> areaEntityOptional = this.areaRepository.findById((rotationValue % DUMMY_LENGTH) + 1);
         if (areaEntityOptional.isEmpty()) {
             logger.info("UserService createUser() : empty");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -58,9 +57,9 @@ public class UserService {
         userEntity.setResidence(residence);
         userEntity = this.userRepository.save(userEntity);
 
-        if (randomValue == 100)
-            randomValue = 0;
-        randomValue++;
+        if (rotationValue == 100)
+            rotationValue = 0;
+        rotationValue++;
 
         return new UserDto(userEntity);
     }

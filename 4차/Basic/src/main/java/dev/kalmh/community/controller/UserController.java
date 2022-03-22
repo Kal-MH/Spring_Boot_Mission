@@ -58,10 +58,19 @@ public class UserController {
             @RequestParam(value = "is_shop_owner", required = false) boolean isShopOwner,
             Model model
     ) {
-        if (!password.equals(passwordCheck) || username.equals("")
-                || password.equals("") || passwordCheck.equals("")) {
+        if (!password.equals(passwordCheck)) {
             logger.info("User Signup Error : Not Valid input value");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            model.addAttribute("username", username);
+            model.addAttribute("error", "true");
+            model.addAttribute("exception", "Password Not Equal");
+            return "signup-form";
+        }
+        if (username.equals("") || password.equals("") || passwordCheck.equals("")) {
+            logger.info("User Signup Error : Empty Value");
+            model.addAttribute("username", username);
+            model.addAttribute("error", "true");
+            model.addAttribute("exception", "Empty Value");
+            return "signup-form";
         }
         if (this.userService.checkUsernameDuplicate(username)) {
             model.addAttribute("username", username);
