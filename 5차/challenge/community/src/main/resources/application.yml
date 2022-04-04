@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: test
+logging:
+  level:
+    dev.kalmh.community.auth.filter: debug

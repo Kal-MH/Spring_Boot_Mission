@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,5 +44,24 @@ public class AreaService {
                 areaEntity -> areaDtoList.add(new AreaDto(areaEntity))
         );
         return areaDtoList;
+    }
+
+    public AreaDto getLocationInfo(Double latitude, Double longitude) {
+        double minDistance = Long.MAX_VALUE;
+        AreaEntity minAreaEntity = null;
+        Iterable<AreaEntity> iterable = this.areaRepository.findAll();
+        Iterator iterator = iterable.iterator();
+
+        while (iterator.hasNext()) {
+            AreaEntity areaEntity = (AreaEntity) iterator.next();
+            double xDistance = Math.pow(Math.abs(latitude - areaEntity.getLatitude()), 2);
+            double yDistance = Math.pow(Math.abs(longitude - areaEntity.getLongitude()), 2);
+            if (minDistance > Math.sqrt(xDistance + yDistance)) {
+                minDistance = Math.sqrt(xDistance + yDistance);
+                minAreaEntity = areaEntity;
+            }
+        }
+        logger.info("AreaService getLocationInfo : " + minAreaEntity);
+        return new AreaDto(minAreaEntity);
     }
 }

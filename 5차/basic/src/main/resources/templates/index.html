@@ -18,10 +18,53 @@
         <h3>
             Welcome back, <span sec:authentication="name"></span>!
         </h3>
+        <div>
+            <button onclick="getLocation()">현재 위치 보기</button>
+            <div id="location-result">
+            </div>
+        </div>
         <form th:action="@{/user/logout}" method="post">
             <input type="submit" th:value="로그아웃">
         </form>
     </div>
 
 </body>
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    async function showPosition(position) {
+       // alert(`Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`);
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
+
+        let response = await (await fetch(`/area/get-location-info?latitude=${latitude}&longitude=${longitude}`, {
+            method : "GET",
+        })).json();
+
+        console.log(response);
+
+        let regionMajor = response.regionMajor;
+        let regionMinor = response.regionMinor;
+        let regionPatch = response.regionPatch;
+        let closestLatitude = response.latitude;
+        let closestLongitude = response.longitude;
+
+        let locationDiv = document.getElementById("location-result");
+        locationDiv.innerHTML = `
+            <h4>현재 위치 보기</h4>
+            <p> Latitude : ${latitude} </p>
+            <p> Longitude : ${longitude} </p>
+             <h4>가장 가까운 위치</h4>
+             <p> ${regionMajor} ${regionMinor} ${regionPatch}</p>
+            <p> Latitude : ${closestLatitude} </p>
+            <p> Longitude : ${closestLongitude} </p>
+        `
+    }
+</script>
 </html>
