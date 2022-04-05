@@ -17,14 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 public class SsoLoginController {
     private static final Logger logger = LoggerFactory.getLogger(SsoLoginController.class);
     private final RedisService redisService;
-    private final PublisherService publisherService;
 
     public SsoLoginController(
-            RedisService redisService,
-            PublisherService publisherService
+            RedisService redisService
     ) {
         this.redisService = redisService;
-        this.publisherService = publisherService;
     }
     //SsoCookieHandler까지 거치고 난 후에 request-login경로로 들어오게 된다.
     @GetMapping("request-login")
@@ -54,10 +51,5 @@ public class SsoLoginController {
     ) {
         logger.info("SsoController request user info : {}", token_value);
         return this.redisService.retrieveUserInfo(token_value);
-    }
-
-    @GetMapping("/")
-    public void sendMessage() {
-        this.publisherService.publishMessage("hello");
     }
 }

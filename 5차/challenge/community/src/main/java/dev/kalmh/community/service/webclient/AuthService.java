@@ -14,7 +14,6 @@ import reactor.core.publisher.Mono;
 public class AuthService {
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
     private final WebClient authClient;
-    private final String REDIRECT_URI = "request_from=http://127.0.0.1:8080/home";
 
     public AuthService(
             @Autowired
@@ -24,9 +23,7 @@ public class AuthService {
     }
 
     public UserInfoDto getUserInfo(String tokenValue) {
-        String uri = String.format("http://localhost:8000/request-userinfo");
-
-        logger.info("AuthService uri : " + uri);
+        logger.info("AuthService tokenValue : " + tokenValue);
         UserInfoDto userInfoDto = this.authClient
                 .get()
                 .uri(uriBuilder ->
@@ -44,20 +41,5 @@ public class AuthService {
                 .bodyToMono(UserInfoDto.class)
                 .block();
         return userInfoDto;
-//        Optional<UserInfoDto> userInfoDto = this.ssoClient
-//                .get()
-//                .uri(uri)
-//                .retrieve()
-//                .bodyToMono(UserInfoDto.class)
-//                .flux()
-//                .toStream()
-//                .findFirst();
-//
-//        logger.info("SsoService getUserInfo uri : {}", uri);
-//        if (userInfoDto.isEmpty()) {
-//            return null;
-//        }
-//        logger.info("SsoService getUserInfo userInfoDto : {}", userInfoDto);
-//        return userInfoDto.get();
     }
 }

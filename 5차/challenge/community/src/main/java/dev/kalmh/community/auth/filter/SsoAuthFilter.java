@@ -46,21 +46,8 @@ public class SsoAuthFilter implements Filter {
             this.setAuthentication(httpRequest, httpResponse, authToken.get());
         } else {
             logger.info("Login Token Missing");
-            this.setAuthentication(httpRequest, httpResponse, "anonymous");
+            this.setAnonymousAuthentication();
         }
-//        if (authToken.isPresent()) {
-//            logger.info("Login Token Value: {}", authToken.get());
-//            this.setSsoAuthentication(authToken.get());
-//        } else {
-//            logger.info("Login Token Missing");
-//            SecurityContextHolder.getContext().setAuthentication(
-//                    new AnonymousAuthenticationToken(
-//                            "anonymous",
-//                            "anonymous",
-//                            Collections.singletonList(
-//                                    (GrantedAuthority) () -> "ROLE_ANONYMOUS"))
-//            );
-//        }
         chain.doFilter(request, response);
     }
 

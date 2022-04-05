@@ -23,9 +23,6 @@ public class PublisherService {
         this.fanoutExchange = fanoutExchange;
     }
 
-    AtomicInteger dots = new AtomicInteger(0);
-    AtomicInteger count = new AtomicInteger(0);
-
     public void publishMessage(String cookieToken){
         rabbitTemplate.convertAndSend(
                 fanoutExchange.getName(),
