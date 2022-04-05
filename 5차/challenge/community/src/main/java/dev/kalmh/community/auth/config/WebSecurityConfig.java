@@ -28,8 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .logout()
                     .logoutUrl("/user/logout")
-                    .logoutSuccessUrl("/home")
-                    .deleteCookies(LikelionSsoConsts.LIKELION_LOGIN_COOKIE)
+                    .logoutSuccessUrl("/JELikelionSsoConstshome")
+                    .deleteCookies(".LIKELION_LOGIN_COOKIE)
                     .invalidateHttpSession(true)
                     .permitAll();
     }

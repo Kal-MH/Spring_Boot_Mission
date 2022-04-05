@@ -1,6 +1,8 @@
 package dev.kalmh.community.auth.filter;
 
 import dev.kalmh.community.auth.LikelionSsoConsts;
+import dev.kalmh.community.controller.dto.UserInfoDto;
+import dev.kalmh.community.service.webclient.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -22,7 +24,9 @@ import java.util.Optional;
 @Component
 public class SsoAuthFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(SsoAuthFilter.class);
+    private final AuthService authService;
 
+    public SsoAuthFilter(AuthService authService) {this.authService = authService;}
     @Override
     public void doFilter(
             ServletRequest request,
@@ -31,6 +35,7 @@ public class SsoAuthFilter implements Filter {
     ) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
+
         Optional<String> authToken = authTokenFromCookie(httpRequest.getCookies());
         if (authToken.isEmpty()) {
             authToken = authTokenFromQuery(httpRequest, httpResponse);
@@ -38,18 +43,24 @@ public class SsoAuthFilter implements Filter {
 
         if (authToken.isPresent()) {
             logger.info("Login Token Value: {}", authToken.get());
-            this.setSsoAuthentication(authToken.get());
+            this.setAuthentication(httpRequest, httpResponse, authToken.get());
         } else {
             logger.info("Login Token Missing");
-            SecurityContextHolder.getContext().setAuthentication(
-                    new AnonymousAuthenticationToken(
-                            "anonymous",
-                            "anonymous",
-                            Collections.singletonList(
-                                    (GrantedAuthority) () -> "ROLE_ANONYMOUS"))
-            );
+            this.setAuthentication(httpRequest, httpResponse, "anonymous");
         }
-
+//        if (authToken.isPresent()) {
+//            logger.info("Login Token Value: {}", authToken.get());
+//            this.setSsoAuthentication(authToken.get());
+//        } else {
+//            logger.info("Login Token Missing");
+//            SecurityContextHolder.getContext().setAuthentication(
+//                    new AnonymousAuthenticationToken(
+//                            "anonymous",
+//                            "anonymous",
+//                            Collections.singletonList(
+//                                    (GrantedAuthority) () -> "ROLE_ANONYMOUS"))
+//            );
+//        }
         chain.doFilter(request, response);
     }
 
@@ -92,9 +103,69 @@ public class SsoAuthFilter implements Filter {
         return Optional.empty();
     }
 
-    private void setSsoAuthentication(String tokenValue){
-        // TODO create new Authentication based on token
+    private void setAuthentication(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String tokenValue){
+        // 1. request userInfo with WebClient
+        UserInfoDto userInfoDto = this.authService.getUserInfo(tokenValue);
+        // 2. set Authentication based on token
+        if (userInfoDto != null) {
+            logger.info("Login UserInfo: {}", userInfoDto.getUsername());
+            this.setLoginAuthentication();
+        }
+        else {
+            logger.info("Anonymous");
+            this.setAnonymousAuthentication();
+        }
 
+    }
+
+    public void setAnonymousAuthentication() {
+        SecurityContextHolder.getContext().setAuthentication(
+                    new AnonymousAuthenticationToken(
+                            "anonymous",
+                            "anonymous",
+                            Collections.singletonList(
+                                    (GrantedAuthority) () -> "ROLE_ANONYMOUS"))
+            );
+    }
+    public void setLoginAuthentication() {
+        SecurityContextHolder.getContext().setAuthentication(new Authentication() {
+            @Override
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                return Collections.emptyList();
+            }
+
+            @Override
+            public Object getCredentials() {
+                return null;
+            }
+
+            @Override
+            public Object getDetails() {
+                return null;
+            }
+
+            @Override
+            public Object getPrincipal() {
+                return (Principal) () -> "dummy";
+            }
+
+            @Override
+            public boolean isAuthenticated() {
+                return true;
+            }
+
+            @Override
+            public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+
+            }
+
+            @Override
+            public String getName() {
+                return "dummy";
+            }
+        });
+    }
+    private void setSsoAuthentication(String s) {
         SecurityContextHolder.getContext().setAuthentication(new Authentication() {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
