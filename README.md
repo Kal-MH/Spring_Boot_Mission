@@ -67,11 +67,11 @@
 
 ### 실행 결과
 
-- Basic
+- < Basic >
 
 ![basic](https://user-images.githubusercontent.com/59648372/161746980-1edde232-32d0-4eeb-8139-d32d4f9ad987.png)
 
-- Challenge
+- < Challenge >
 
 ![로그인 성공](https://user-images.githubusercontent.com/59648372/161747023-70204380-fcd7-4609-8f32-58474b9bc65a.png)
 
