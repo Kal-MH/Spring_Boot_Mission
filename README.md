@@ -42,7 +42,7 @@
 ![challenge ERD](https://user-images.githubusercontent.com/59648372/157195113-8b5b0fe3-ee33-42fa-86ef-0248fe771211.png)
 
 ## 4차 미션 스크린샷(~ 3/22)
-[Basic 3차 미션 Document](https://github.com/Kal-MH/Spring_Boot_Mission/blob/master/4%EC%B0%A8/README.md)
+[Basic 4차 미션 Document](https://github.com/Kal-MH/Spring_Boot_Mission/blob/master/4%EC%B0%A8/README.md)
 
 ### 실행결과
 
@@ -61,3 +61,18 @@
 - 로그인 성공
 
 ![login-home](https://user-images.githubusercontent.com/59648372/159421184-c1b56a1f-a422-46ba-ad61-2657b5ed5e0a.png)
+
+## 5차 미션 스크린샷 (~ 4/5)
+[Basic & Challenge 5차 미션 Document](https://github.com/Kal-MH/Spring_Boot_Mission/blob/master/5%EC%B0%A8/README.md)
+
+### 실행 결과
+
+- Basic
+
+![basic](https://user-images.githubusercontent.com/59648372/161746980-1edde232-32d0-4eeb-8139-d32d4f9ad987.png)
+
+- Challenge
+
+![로그인 성공](https://user-images.githubusercontent.com/59648372/161747023-70204380-fcd7-4609-8f32-58474b9bc65a.png)
+
+
